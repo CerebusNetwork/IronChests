@@ -1,8 +1,8 @@
-package com.example
+package com.cerebus.ironchests
 
 import xyz.xenondevs.nova.addon.Addon
 
-object ExampleAddon : Addon() {
+object IronChests : Addon() {
     
     override fun init() {
         // Called when the addon is initialized.
