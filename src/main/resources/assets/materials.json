@@ -1,0 +1,8 @@
+{
+  "iron_chest": {
+    "item": "block/iron_chest",
+    "block": {
+      "directions": "nesw"
+    }
+  }
+}
