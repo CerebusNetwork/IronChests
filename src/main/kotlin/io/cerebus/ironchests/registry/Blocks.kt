@@ -1,6 +1,7 @@
 package io.cerebus.ironchests.registry
 
 import io.cerebus.ironchests.IronChests
+import io.cerebus.ironchests.tileentity.GoldChest
 import io.cerebus.ironchests.tileentity.IronChest
 import org.bukkit.Material
 import xyz.xenondevs.nova.addon.registry.BlockRegistry
@@ -23,6 +24,16 @@ object Blocks : BlockRegistry by IronChests.registry {
         Material.IRON_BLOCK
     )
     
+    private val GOLD_CHEST_OPTIONS = BlockOptions(
+        3.0,
+        VanillaToolCategories.PICKAXE,
+        VanillaToolTiers.STONE,
+        true,
+        SoundGroup.STONE,
+        Material.GOLD_BLOCK
+    )
+    
     val IRON_CHEST = tileEntity("iron_chest", ::IronChest).blockOptions(IRON_CHEST_OPTIONS).properties(Directional.NORMAL).register()
+    val GOLD_CHEST = tileEntity("gold_chest", ::GoldChest).blockOptions(GOLD_CHEST_OPTIONS).properties(Directional.NORMAL).register()
 
 }

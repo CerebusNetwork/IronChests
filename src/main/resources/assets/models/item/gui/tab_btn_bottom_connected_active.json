@@ -1,0 +1,6 @@
+{
+  "parent": "ironchests:item/gui/big_gui_item",
+  "textures": {
+    "texture": "ironchests:item/gui/tab_btn_bottom_connected_active"
+  }
+}

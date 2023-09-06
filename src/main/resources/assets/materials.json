@@ -4,5 +4,21 @@
     "block": {
       "directions": "nesw"
     }
-  }
+  },
+  "gold_chest": {
+    "item": "block/gold_chest",
+    "block": {
+      "directions": "nesw"
+    }
+  },
+  "gui_tab_btn_bottom": "item/gui/tab_btn_bottom",
+  "gui_tab_btn_bottom_active": "item/gui/tab_btn_bottom_active",
+  "gui_tab_btn_bottom_connected": "item/gui/tab_btn_bottom_connected",
+  "gui_tab_btn_bottom_connected_active": "item/gui/tab_btn_bottom_connected_active",
+  "gui_tab_btn_middle": "item/gui/tab_btn_middle",
+  "gui_tab_btn_middle_active": "item/gui/tab_btn_middle_active",
+  "gui_tab_btn_top": "item/gui/tab_btn_top",
+  "gui_tab_btn_top_active": "item/gui/tab_btn_top_active",
+  "gui_tab_btn_top_connected": "item/gui/tab_btn_top_connected",
+  "gui_tab_btn_top_connected_active": "item/gui/tab_btn_top_connected_active"
 }
