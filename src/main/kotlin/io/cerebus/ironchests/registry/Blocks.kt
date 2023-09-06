@@ -1,7 +1,7 @@
-package com.cerebus.ironchests.registry
+package io.cerebus.ironchests.registry
 
-import com.cerebus.ironchests.IronChests
-import com.cerebus.ironchests.tileentity.IronChest
+import io.cerebus.ironchests.IronChests
+import io.cerebus.ironchests.tileentity.IronChest
 import org.bukkit.Material
 import xyz.xenondevs.nova.addon.registry.BlockRegistry
 import xyz.xenondevs.nova.data.world.block.property.Directional

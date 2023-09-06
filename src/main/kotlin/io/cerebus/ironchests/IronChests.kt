@@ -1,4 +1,4 @@
-package com.cerebus.ironchests
+package io.cerebus.ironchests
 
 import xyz.xenondevs.nova.addon.Addon
 

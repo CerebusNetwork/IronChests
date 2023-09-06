@@ -1,7 +1,7 @@
 import org.gradle.configurationcache.extensions.capitalized
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-group = "com.cerebus.ironchests"
+group = "io.cerebus.ironchests"
 version = "1.0-SNAPSHOT"
 
 val mojangMapped = project.hasProperty("mojang-mapped")
@@ -22,7 +22,7 @@ addon {
     name.set(project.name.capitalized())
     version.set(project.version.toString())
     novaVersion.set(libs.versions.nova)
-    main.set("com.cerebus.ironchests.IronChests")
+    main.set("io.cerebus.ironchests.IronChests")
     authors.add("CraftCoderr")
 }
 

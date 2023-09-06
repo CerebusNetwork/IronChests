@@ -1,4 +1,4 @@
-package com.cerebus.ironchests.tileentity
+package io.cerebus.ironchests.tileentity
 
 import org.bukkit.inventory.ItemStack
 import xyz.xenondevs.invui.gui.Gui

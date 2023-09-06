@@ -1,6 +1,6 @@
-package com.cerebus.ironchests.registry
+package io.cerebus.ironchests.registry
 
-import com.cerebus.ironchests.IronChests
+import io.cerebus.ironchests.IronChests
 import xyz.xenondevs.nova.addon.registry.ItemRegistry
 import xyz.xenondevs.nova.initialize.Init
 
