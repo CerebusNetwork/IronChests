@@ -9,6 +9,7 @@ object Items : ItemRegistry by IronChests.registry {
     
     val IRON_CHEST = registerItem(Blocks.IRON_CHEST)
     val GOLD_CHEST = registerItem(Blocks.GOLD_CHEST)
+    val DIAMOND_CHEST = registerItem(Blocks.DIAMOND_CHEST)
     
 }
 @Init

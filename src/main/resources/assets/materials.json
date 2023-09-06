@@ -11,6 +11,12 @@
       "directions": "nesw"
     }
   },
+  "diamond_chest": {
+    "item": "block/diamond_chest",
+    "block": {
+      "directions": "nesw"
+    }
+  },
   "gui_tab_btn_bottom": "item/gui/tab_btn_bottom",
   "gui_tab_btn_bottom_active": "item/gui/tab_btn_bottom_active",
   "gui_tab_btn_bottom_connected": "item/gui/tab_btn_bottom_connected",
