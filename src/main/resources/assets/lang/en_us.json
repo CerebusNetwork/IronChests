@@ -1,5 +1,6 @@
 {
   "block.ironchests.iron_chest": "Iron chest",
   "block.ironchests.gold_chest": "Gold chest",
-  "block.ironchests.diamond_chest": "Diamond chest"
+  "block.ironchests.diamond_chest": "Diamond chest",
+  "item.ironchests.wood_iron_upgrade": "Wooden to Iron Chest Upgrade"
 }

@@ -17,6 +17,7 @@
       "directions": "nesw"
     }
   },
+  "wood_iron_upgrade": "item/wood_iron_upgrade",
   "gui_tab_btn_bottom": "item/gui/tab_btn_bottom",
   "gui_tab_btn_bottom_active": "item/gui/tab_btn_bottom_active",
   "gui_tab_btn_bottom_connected": "item/gui/tab_btn_bottom_connected",

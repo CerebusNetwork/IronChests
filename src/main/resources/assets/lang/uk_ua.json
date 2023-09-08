@@ -1,5 +1,6 @@
 {
   "block.ironchests.iron_chest": "Залізна скриня",
   "block.ironchests.gold_chest": "Золота скриня",
-  "block.ironchests.diamond_chest": "Алмазна скриня"
+  "block.ironchests.diamond_chest": "Алмазна скриня",
+  "item.ironchests.wood_iron_upgrade": "Покращення з дерев'яної до залізної скрині"
 }

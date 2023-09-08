@@ -1,6 +1,7 @@
 package io.cerebus.ironchests.registry
 
 import io.cerebus.ironchests.IronChests
+import io.cerebus.ironchests.item.WoodChestUpgradeBehavior
 import xyz.xenondevs.nova.addon.registry.ItemRegistry
 import xyz.xenondevs.nova.initialize.Init
 
@@ -10,6 +11,8 @@ object Items : ItemRegistry by IronChests.registry {
     val IRON_CHEST = registerItem(Blocks.IRON_CHEST)
     val GOLD_CHEST = registerItem(Blocks.GOLD_CHEST)
     val DIAMOND_CHEST = registerItem(Blocks.DIAMOND_CHEST)
+    
+    val WOOD_IRON_UPGRADE = item("wood_iron_upgrade").behaviors(WoodChestUpgradeBehavior).maxStackSize(1).register()
     
 }
 @Init
