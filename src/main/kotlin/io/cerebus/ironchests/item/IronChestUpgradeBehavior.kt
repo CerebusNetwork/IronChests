@@ -3,7 +3,9 @@ package io.cerebus.ironchests.item
 import io.cerebus.ironchests.registry.Items
 import io.cerebus.ironchests.tileentity.GoldChest
 import io.cerebus.ironchests.tileentity.IronChest
+import org.bukkit.Location
 import org.bukkit.Material
+import org.bukkit.block.Block
 import org.bukkit.block.BlockFace
 import org.bukkit.entity.Player
 import org.bukkit.event.block.Action
@@ -22,47 +24,28 @@ import xyz.xenondevs.nova.world.block.context.BlockPlaceContext
 import xyz.xenondevs.nova.world.pos
 import org.bukkit.block.data.type.Chest as ChestBlockData
 
-object IronChestUpgradeBehavior : ItemBehavior {
+object IronChestUpgradeBehavior : BaseUpgradeBehaviour() {
+    override fun isValidTargetBlock(block: Block): Boolean = (block.novaBlock?.item == Items.IRON_CHEST)
     
-    override fun handleInteract(player: Player, itemStack: ItemStack, action: Action, event: WrappedPlayerInteractEvent) {
-        if (event.event.action != Action.RIGHT_CLICK_BLOCK || player.isSneaking) {
-            return
-        }
-        val hand = event.event.hand!!
-        val block = event.event.clickedBlock!!
-        val blockLocation = block.location
-        
-        if (block.novaBlock?.item != Items.IRON_CHEST) {
-            return
-        }
-        
-        val novaBlockState = blockLocation.block.novaBlockState
+    override fun getOriginalChestData(block: Block): ChestData {
+        val novaBlockState = block.novaBlockState
         val ironChest = ((novaBlockState as? NovaTileEntityState)?.tileEntity as? IronChest)!!
-        val items = ironChest.inventories[0].items
         
-        val placePos = block.location.pos
-        val direction = novaBlockState.getProperty(Directional::class)!!.facing
-        val directionalSourceLocation = block.getRelative(direction).location.center().setDirection(
-            direction.oppositeFace.let {
-                Vector(it.modX, it.modY, it.modZ)
-            })
+        return ChestData(novaBlockState.getProperty(Directional::class)!!.facing, ironChest.containers[0].items)
+    }
+    
+    override fun createUpgradedChestItemStack(): ItemStack = Items.GOLD_CHEST.createItemStack()
+    
+    override fun setUpgradedChestItems(blockLocation: Location, items: Array<ItemStack?>) {
+        val goldChest = ((blockLocation.block.novaBlockState as? NovaTileEntityState)?.tileEntity as? GoldChest)!!
         
-        block.type = Material.AIR
-        val ctx = BlockPlaceContext(placePos, Items.GOLD_CHEST.createItemStack(), player, directionalSourceLocation, player.uniqueId, placePos.copy(y = placePos.y - 1), BlockFace.UP)
-        if (placePos.block.place(ctx)) {
-            val goldChest = ((blockLocation.block.novaBlockState as? NovaTileEntityState)?.tileEntity as? GoldChest)!!
-            
-            for (i in items.indices) {
-                val x = i % 9
-                val y = i / 9
-                val targetInventory = x / 8
-                val targetSlot = y * 8 + (x % 8)
-                goldChest.inventories[targetInventory].setItem(null, targetSlot, items[i])
-            }
-            
-            player.inventory.getItem(hand).amount -= 1
-            
-            event.event.isCancelled = true
+        for (i in items.indices) {
+            val x = i % 9
+            val y = i / 9
+            val targetContainer = x / 8
+            val targetSlot = y * 8 + (x % 8)
+            goldChest.containers[targetContainer].setItem(null, targetSlot, items[i])
         }
     }
+    
 }

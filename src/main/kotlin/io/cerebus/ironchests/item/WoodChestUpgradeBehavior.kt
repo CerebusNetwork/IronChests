@@ -2,7 +2,9 @@ package io.cerebus.ironchests.item
 
 import io.cerebus.ironchests.registry.Items
 import io.cerebus.ironchests.tileentity.IronChest
+import org.bukkit.Location
 import org.bukkit.Material
+import org.bukkit.block.Block
 import org.bukkit.block.BlockFace
 import org.bukkit.block.Chest
 import org.bukkit.entity.Player
@@ -22,49 +24,28 @@ import xyz.xenondevs.nova.world.block.context.BlockPlaceContext
 import xyz.xenondevs.nova.world.pos
 import org.bukkit.block.data.type.Chest as ChestBlockData
 
-object WoodChestUpgradeBehavior : ItemBehavior {
+object WoodChestUpgradeBehavior : BaseUpgradeBehaviour() {
+    override fun isValidTargetBlock(block: Block): Boolean = (block.type == Material.CHEST)
     
-    override fun handleInteract(player: Player, itemStack: ItemStack, action: Action, event: WrappedPlayerInteractEvent) {
-        if (event.event.action != Action.RIGHT_CLICK_BLOCK || player.isSneaking) {
-            return
-        }
-        val hand = event.event.hand!!
-        val block = event.event.clickedBlock!!
-        val blockLocation = block.location
-        
-        if (block.type != Material.CHEST) {
-            return
-        }
-        
-        val chestInventory = (block.world.getBlockState(blockLocation) as Chest).inventory
+    override fun getOriginalChestData(block: Block): ChestData {
+        val chestInventory = (block.world.getBlockState(block.location) as Chest).inventory
         val actualBlockInventory =
             if (chestInventory is DoubleChestInventory) {
                 val leftPos = (chestInventory.leftSide.holder as? BlockInventoryHolder)!!.block.pos
-                if (leftPos == blockLocation.pos) chestInventory.leftSide else chestInventory.rightSide
+                if (leftPos == block.location.pos) chestInventory.leftSide else chestInventory.rightSide
             } else {
                 chestInventory
             }
-        val items = actualBlockInventory.contents
+        return ChestData((block.blockData as ChestBlockData).facing, actualBlockInventory.contents)
+    }
+    
+    override fun createUpgradedChestItemStack(): ItemStack = Items.IRON_CHEST.createItemStack()
+    
+    override fun setUpgradedChestItems(blockLocation: Location, items: Array<ItemStack?>) {
+        val ironChest = ((blockLocation.block.novaBlockState as? NovaTileEntityState)?.tileEntity as? IronChest)!!
         
-        val placePos = blockLocation.pos
-        val direction = (block.blockData as ChestBlockData).facing
-        val directionalSourceLocation = block.getRelative(direction).location.center().setDirection(
-            direction.oppositeFace.let {
-                Vector(it.modX, it.modY, it.modZ)
-            })
-        
-        block.type = Material.AIR
-        val ctx = BlockPlaceContext(placePos, Items.IRON_CHEST.createItemStack(), player, directionalSourceLocation, player.uniqueId, placePos.copy(y = placePos.y - 1), BlockFace.UP)
-        if (placePos.block.place(ctx)) {
-            val ironChest = ((blockLocation.block.novaBlockState as? NovaTileEntityState)?.tileEntity as? IronChest)!!
-            
-            for (i in items.indices) {
-                ironChest.inventories[0].setItem(null, i, items[i])
-            }
-            
-            player.inventory.getItem(hand).amount -= 1
-            
-            event.event.isCancelled = true
+        for (i in items.indices) {
+            ironChest.containers[0].setItem(null, i, items[i])
         }
     }
 }

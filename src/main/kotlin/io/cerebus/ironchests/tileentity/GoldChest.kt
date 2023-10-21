@@ -12,8 +12,7 @@ import xyz.xenondevs.nova.tileentity.menu.TileEntityMenuClass
 
 class GoldChest(blockState: NovaTileEntityState) : TileEntity(blockState) {
     
-    private val inventory1 = getInventory("goldChestInventory1", 48)
-    private val inventory2 = getInventory("goldChestInventory2", 48)
+    val containers = arrayOf(getInventory("goldChestInventory1", 48), getInventory("goldChestInventory2", 48))
     
     @TileEntityMenuClass
     inner class GoldChestMenu : GlobalTileEntityMenu() {
@@ -22,8 +21,8 @@ class GoldChest(blockState: NovaTileEntityState) : TileEntity(blockState) {
         private val tabGui2 = Gui.empty(8, 6)
         
         init {
-            tabGui1.fillRectangle(0, 0, 8, inventory1, true)
-            tabGui2.fillRectangle(0, 0, 8, inventory2, true)
+            tabGui1.fillRectangle(0, 0, 8, containers[0], true)
+            tabGui2.fillRectangle(0, 0, 8, containers[1], true)
         }
         
         private fun createTabItems(tab: Int, top: Boolean = false, bottom: Boolean = false): Array<Item> {
