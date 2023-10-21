@@ -2,5 +2,7 @@
   "block.ironchests.iron_chest": "Железный сундук",
   "block.ironchests.gold_chest": "Золотой сундук",
   "block.ironchests.diamond_chest": "Алмазный сундук",
-  "item.ironchests.wood_iron_upgrade": "Улучшение с деревянного до железного сундука"
+  "item.ironchests.wood_iron_upgrade": "Улучшение с деревянного до железного сундука",
+  "item.ironchests.iron_gold_upgrade": "Улучшение с железного до золотого сундука",
+  "item.ironchests.gold_diamond_upgrade": "Улучшение с золотого до алмазного сундука"
 }

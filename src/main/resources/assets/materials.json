@@ -19,6 +19,7 @@
   },
   "wood_iron_upgrade": "item/wood_iron_upgrade",
   "iron_gold_upgrade": "item/iron_gold_upgrade",
+  "gold_diamond_upgrade": "item/gold_diamond_upgrade",
   "gui_tab_btn_bottom": "item/gui/tab_btn_bottom",
   "gui_tab_btn_bottom_active": "item/gui/tab_btn_bottom_active",
   "gui_tab_btn_bottom_connected": "item/gui/tab_btn_bottom_connected",

@@ -10,9 +10,11 @@ import xyz.xenondevs.nova.data.world.block.state.NovaTileEntityState
 import xyz.xenondevs.nova.tileentity.TileEntity
 import xyz.xenondevs.nova.tileentity.menu.TileEntityMenuClass
 
-class GoldChest(blockState: NovaTileEntityState) : TileEntity(blockState) {
+class GoldChest(blockState: NovaTileEntityState) : CustomChest(blockState) {
     
-    val containers = arrayOf(getInventory("goldChestInventory1", 48), getInventory("goldChestInventory2", 48))
+    init {
+        containers = arrayOf(getInventory("goldChestInventory1", 48), getInventory("goldChestInventory2", 48))
+    }
     
     @TileEntityMenuClass
     inner class GoldChestMenu : GlobalTileEntityMenu() {

@@ -2,5 +2,7 @@
   "block.ironchests.iron_chest": "Iron chest",
   "block.ironchests.gold_chest": "Gold chest",
   "block.ironchests.diamond_chest": "Diamond chest",
-  "item.ironchests.wood_iron_upgrade": "Wooden to Iron Chest Upgrade"
+  "item.ironchests.wood_iron_upgrade": "Wooden to Iron Chest Upgrade",
+  "item.ironchests.iron_gold_upgrade": "Iron to Gold Chest Upgrade",
+  "item.ironchests.gold_diamond_upgrade": "Gold to Diamond Chest Upgrade"
 }

@@ -6,9 +6,11 @@ import xyz.xenondevs.nova.data.world.block.state.NovaTileEntityState
 import xyz.xenondevs.nova.tileentity.TileEntity
 import xyz.xenondevs.nova.tileentity.menu.TileEntityMenuClass
 
-class IronChest(blockState: NovaTileEntityState) : TileEntity(blockState) {
+class IronChest(blockState: NovaTileEntityState) : CustomChest(blockState) {
     
-     val containers = arrayOf(getInventory("ironChestInventory", 54))
+    init {
+        containers = arrayOf(getInventory("ironChestInventory", 54))
+    }
 
     @TileEntityMenuClass
     inner class IronChestMenu : GlobalTileEntityMenu() {

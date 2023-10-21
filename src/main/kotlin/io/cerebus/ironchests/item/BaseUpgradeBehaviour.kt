@@ -23,7 +23,7 @@ abstract class BaseUpgradeBehaviour : ItemBehavior {
     
     abstract fun createUpgradedChestItemStack(): ItemStack
     
-    abstract fun setUpgradedChestItems(blockLocation: Location, items: Array<ItemStack?>)
+    abstract fun setUpgradedChestItems(blockLocation: Location, items: Array<Array<ItemStack?>>)
     
     override fun handleInteract(player: Player, itemStack: ItemStack, action: Action, wrappedEvent: WrappedPlayerInteractEvent) {
         if (wrappedEvent.event.action != Action.RIGHT_CLICK_BLOCK || player.isSneaking) {
@@ -59,5 +59,5 @@ abstract class BaseUpgradeBehaviour : ItemBehavior {
         }
     }
     
-    data class ChestData(val direction: BlockFace, val items: Array<ItemStack?>)
+    data class ChestData(val direction: BlockFace, val items: Array<Array<ItemStack?>>)
 }

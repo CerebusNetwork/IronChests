@@ -10,11 +10,11 @@ import xyz.xenondevs.nova.data.world.block.state.NovaTileEntityState
 import xyz.xenondevs.nova.tileentity.TileEntity
 import xyz.xenondevs.nova.tileentity.menu.TileEntityMenuClass
 
-class DiamondChest(blockState: NovaTileEntityState) : TileEntity(blockState) {
+class DiamondChest(blockState: NovaTileEntityState) : CustomChest(blockState) {
     
-    private val inventory1 = getInventory("goldChestInventory1", 48)
-    private val inventory2 = getInventory("goldChestInventory2", 48)
-    private val inventory3 = getInventory("goldChestInventory3", 48)
+    init {
+        containers = arrayOf(getInventory("goldChestInventory1", 48), getInventory("goldChestInventory2", 48), getInventory("goldChestInventory3", 48))
+    }
     
     @TileEntityMenuClass
     inner class GoldChestMenu : GlobalTileEntityMenu() {
@@ -24,9 +24,9 @@ class DiamondChest(blockState: NovaTileEntityState) : TileEntity(blockState) {
         private val tabGui3 = Gui.empty(8, 6)
         
         init {
-            tabGui1.fillRectangle(0, 0, 8, inventory1, true)
-            tabGui2.fillRectangle(0, 0, 8, inventory2, true)
-            tabGui3.fillRectangle(0, 0, 8, inventory3, true)
+            tabGui1.fillRectangle(0, 0, 8, containers[0], true)
+            tabGui2.fillRectangle(0, 0, 8, containers[1], true)
+            tabGui3.fillRectangle(0, 0, 8, containers[2], true)
         }
         
         private fun createTabItems(tab: Int, top: Boolean = false, bottom: Boolean = false): Array<Item> {
