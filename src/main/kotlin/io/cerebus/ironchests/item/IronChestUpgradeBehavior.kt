@@ -1,27 +1,27 @@
 package io.cerebus.ironchests.item
 
 import io.cerebus.ironchests.registry.Items
+import io.cerebus.ironchests.tileentity.GoldChest
 import io.cerebus.ironchests.tileentity.IronChest
 import org.bukkit.Material
 import org.bukkit.block.BlockFace
-import org.bukkit.block.Chest
 import org.bukkit.entity.Player
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.inventory.BlockInventoryHolder
-import org.bukkit.inventory.DoubleChestInventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.Vector
+import xyz.xenondevs.nova.data.world.block.property.Directional
 import xyz.xenondevs.nova.data.world.block.state.NovaTileEntityState
 import xyz.xenondevs.nova.item.behavior.ItemBehavior
 import xyz.xenondevs.nova.util.center
+import xyz.xenondevs.nova.util.novaBlock
 import xyz.xenondevs.nova.util.novaBlockState
 import xyz.xenondevs.nova.util.place
 import xyz.xenondevs.nova.world.block.context.BlockPlaceContext
 import xyz.xenondevs.nova.world.pos
 import org.bukkit.block.data.type.Chest as ChestBlockData
 
-object WoodChestUpgradeBehavior : ItemBehavior() {
+object IronChestUpgradeBehavior : ItemBehavior() {
     
     override fun handleInteract(player: Player, itemStack: ItemStack, action: Action, event: PlayerInteractEvent) {
         if (event.action != Action.RIGHT_CLICK_BLOCK || player.isSneaking) {
@@ -31,34 +31,32 @@ object WoodChestUpgradeBehavior : ItemBehavior() {
         val block = event.clickedBlock!!
         val blockLocation = block.location
         
-        if (block.type != Material.CHEST) {
+        if (block.novaBlock?.item != Items.IRON_CHEST) {
             return
         }
         
-        val chestInventory = (block.world.getBlockState(blockLocation) as Chest).inventory
-        val actualBlockInventory =
-            if (chestInventory is DoubleChestInventory) {
-                val leftPos = (chestInventory.leftSide.holder as? BlockInventoryHolder)!!.block.pos
-                if (leftPos == blockLocation.pos) chestInventory.leftSide else chestInventory.rightSide
-            } else {
-                chestInventory
-            }
-        val items = actualBlockInventory.contents!!
+        val novaBlockState = blockLocation.block.novaBlockState
+        val ironChest = ((novaBlockState as? NovaTileEntityState)?.tileEntity as? IronChest)!!
+        val items = ironChest.inventories[0].items
         
-        val placePos = blockLocation.pos
-        val direction = (block.blockData as ChestBlockData).facing
+        val placePos = block.location.pos
+        val direction = novaBlockState.getProperty(Directional::class)!!.facing
         val directionalSourceLocation = block.getRelative(direction).location.center().setDirection(
             direction.oppositeFace.let {
                 Vector(it.modX, it.modY, it.modZ)
             })
         
         block.type = Material.AIR
-        val ctx = BlockPlaceContext(placePos, Items.IRON_CHEST.createItemStack(), player, directionalSourceLocation, player.uniqueId, placePos.copy(y = placePos.y - 1), BlockFace.UP)
+        val ctx = BlockPlaceContext(placePos, Items.GOLD_CHEST.createItemStack(), player, directionalSourceLocation, player.uniqueId, placePos.copy(y = placePos.y - 1), BlockFace.UP)
         if (placePos.block.place(ctx)) {
-            val ironChest = ((blockLocation.block.novaBlockState as? NovaTileEntityState)?.tileEntity as? IronChest)!!
+            val goldChest = ((blockLocation.block.novaBlockState as? NovaTileEntityState)?.tileEntity as? GoldChest)!!
             
             for (i in items.indices) {
-                ironChest.inventories[0].setItem(null, i, items[i])
+                val x = i % 9
+                val y = i / 9
+                val targetInventory = x / 8
+                val targetSlot = y * 8 + (x % 8)
+                goldChest.inventories[targetInventory].setItem(null, targetSlot, items[i])
             }
             
             player.inventory.getItem(hand)!!.amount -= 1
