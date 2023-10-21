@@ -5,8 +5,9 @@ import io.cerebus.ironchests.item.IronChestUpgradeBehavior
 import io.cerebus.ironchests.item.WoodChestUpgradeBehavior
 import xyz.xenondevs.nova.addon.registry.ItemRegistry
 import xyz.xenondevs.nova.initialize.Init
+import xyz.xenondevs.nova.initialize.InitStage
 
-@Init
+@Init(stage = InitStage.PRE_PACK)
 object Items : ItemRegistry by IronChests.registry {
     
     val IRON_CHEST = registerItem(Blocks.IRON_CHEST)
@@ -17,7 +18,7 @@ object Items : ItemRegistry by IronChests.registry {
     val IRON_GOLD_UPGRADE = item("iron_gold_upgrade").behaviors(IronChestUpgradeBehavior).maxStackSize(1).register()
     
 }
-@Init
+@Init(stage = InitStage.PRE_PACK)
 object GuiItems : ItemRegistry by IronChests.registry {
     
     val TAB_BTN_BOTTOM = registerUnnamedHiddenItem("gui_tab_btn_bottom")

@@ -8,12 +8,13 @@ import org.bukkit.Material
 import xyz.xenondevs.nova.addon.registry.BlockRegistry
 import xyz.xenondevs.nova.data.world.block.property.Directional
 import xyz.xenondevs.nova.initialize.Init
+import xyz.xenondevs.nova.initialize.InitStage
 import xyz.xenondevs.nova.item.options.BlockOptions
 import xyz.xenondevs.nova.item.tool.VanillaToolCategories
 import xyz.xenondevs.nova.item.tool.VanillaToolTiers
 import xyz.xenondevs.nova.world.block.sound.SoundGroup
 
-@Init
+@Init(stage = InitStage.PRE_PACK)
 object Blocks : BlockRegistry by IronChests.registry {
     
     private val IRON_CHEST_OPTIONS = BlockOptions(

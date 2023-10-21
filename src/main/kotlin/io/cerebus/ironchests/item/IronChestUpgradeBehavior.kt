@@ -13,6 +13,7 @@ import org.bukkit.util.Vector
 import xyz.xenondevs.nova.data.world.block.property.Directional
 import xyz.xenondevs.nova.data.world.block.state.NovaTileEntityState
 import xyz.xenondevs.nova.item.behavior.ItemBehavior
+import xyz.xenondevs.nova.player.WrappedPlayerInteractEvent
 import xyz.xenondevs.nova.util.center
 import xyz.xenondevs.nova.util.novaBlock
 import xyz.xenondevs.nova.util.novaBlockState
@@ -21,14 +22,14 @@ import xyz.xenondevs.nova.world.block.context.BlockPlaceContext
 import xyz.xenondevs.nova.world.pos
 import org.bukkit.block.data.type.Chest as ChestBlockData
 
-object IronChestUpgradeBehavior : ItemBehavior() {
+object IronChestUpgradeBehavior : ItemBehavior {
     
-    override fun handleInteract(player: Player, itemStack: ItemStack, action: Action, event: PlayerInteractEvent) {
-        if (event.action != Action.RIGHT_CLICK_BLOCK || player.isSneaking) {
+    override fun handleInteract(player: Player, itemStack: ItemStack, action: Action, event: WrappedPlayerInteractEvent) {
+        if (event.event.action != Action.RIGHT_CLICK_BLOCK || player.isSneaking) {
             return
         }
-        val hand = event.hand!!
-        val block = event.clickedBlock!!
+        val hand = event.event.hand!!
+        val block = event.event.clickedBlock!!
         val blockLocation = block.location
         
         if (block.novaBlock?.item != Items.IRON_CHEST) {
@@ -59,9 +60,9 @@ object IronChestUpgradeBehavior : ItemBehavior() {
                 goldChest.inventories[targetInventory].setItem(null, targetSlot, items[i])
             }
             
-            player.inventory.getItem(hand)!!.amount -= 1
+            player.inventory.getItem(hand).amount -= 1
             
-            event.isCancelled = true
+            event.event.isCancelled = true
         }
     }
 }
