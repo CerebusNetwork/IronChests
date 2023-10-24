@@ -1,0 +1,13 @@
+{
+  "result": "ironchests:gold_diamond_upgrade",
+  "shape": [
+    "ggg",
+    "did",
+    "ggg"
+  ],
+  "ingredients": {
+    "d": "minecraft:diamond",
+    "g": "minecraft:glass",
+    "i": "minecraft:gold_ingot"
+  }
+}

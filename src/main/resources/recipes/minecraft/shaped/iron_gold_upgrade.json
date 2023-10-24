@@ -1,0 +1,12 @@
+{
+  "result": "ironchests:iron_gold_upgrade",
+  "shape": [
+    "ggg",
+    "gig",
+    "ggg"
+  ],
+  "ingredients": {
+    "i": "minecraft:iron_ingot",
+    "g": "minecraft:gold_ingot"
+  }
+}

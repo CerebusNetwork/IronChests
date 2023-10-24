@@ -1,0 +1,12 @@
+{
+  "result": "ironchests:iron_chest",
+  "shape": [
+    "iii",
+    "ici",
+    "iii"
+  ],
+  "ingredients": {
+    "i": "minecraft:iron_ingot",
+    "c": "minecraft:chest"
+  }
+}

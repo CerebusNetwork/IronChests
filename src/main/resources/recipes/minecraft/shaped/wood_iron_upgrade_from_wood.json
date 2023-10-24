@@ -1,0 +1,21 @@
+{
+  "result": "ironchests:wood_iron_upgrade",
+  "shape": [
+    "iii",
+    "iwi",
+    "iii"
+  ],
+  "ingredients": {
+    "i": "minecraft:iron_ingot",
+    "w": [
+      "minecraft:oak_planks",
+      "minecraft:spruce_planks",
+      "minecraft:birch_planks",
+      "minecraft:jungle_planks",
+      "minecraft:acacia_planks",
+      "minecraft:dark_oak_planks",
+      "minecraft:crimson_planks",
+      "minecraft:warped_planks"
+    ]
+  }
+}

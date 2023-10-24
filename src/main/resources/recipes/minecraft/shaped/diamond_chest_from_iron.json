@@ -1,0 +1,13 @@
+{
+  "result": "ironchests:diamond_chest",
+  "shape": [
+    "ggg",
+    "gcg",
+    "ddd"
+  ],
+  "ingredients": {
+    "d": "minecraft:diamond",
+    "g": "minecraft:glass",
+    "c": "ironchests:iron_chest"
+  }
+}

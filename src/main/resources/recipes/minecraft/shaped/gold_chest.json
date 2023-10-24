@@ -1,0 +1,12 @@
+{
+  "result": "ironchests:gold_chest",
+  "shape": [
+    "ggg",
+    "gcg",
+    "ggg"
+  ],
+  "ingredients": {
+    "g": "minecraft:gold_ingot",
+    "c": "ironchests:iron_chest"
+  }
+}
