@@ -48,7 +48,7 @@ abstract class BaseUpgradeBehaviour : ItemBehavior {
         
         block.type = Material.AIR
         val ctx = BlockPlaceContext(placePos, createUpgradedChestItemStack(), player, directionalSourceLocation, player.uniqueId, placePos.copy(y = placePos.y - 1), BlockFace.UP)
-        if (placePos.block.place(ctx)) {
+        if (placePos.block.place(ctx, false)) {
             setUpgradedChestItems(blockLocation, originalChestData.items)
             
             player.inventory.getItem(hand).amount -= 1
