@@ -2,7 +2,7 @@ import org.gradle.configurationcache.extensions.capitalized
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 group = "io.cerebus.ironchests"
-version = "1.0-SNAPSHOT"
+version = "0.1-alpha"
 
 val mojangMapped = project.hasProperty("mojang-mapped")
 
