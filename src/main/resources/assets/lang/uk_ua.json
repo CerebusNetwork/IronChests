@@ -4,5 +4,6 @@
   "block.ironchests.diamond_chest": "Алмазна скриня",
   "item.ironchests.wood_iron_upgrade": "Покращення з дерев'яної до залізної скрині",
   "item.ironchests.iron_gold_upgrade": "Покращення із залізної до золотої скрині",
-  "item.ironchests.gold_diamond_upgrade": "Покращення із золотої до алмазної скрині"
+  "item.ironchests.gold_diamond_upgrade": "Покращення із золотої до алмазної скрині",
+  "menu.ironchests.items.category.ironchests": "Залізні Скрині"
 }

@@ -1,0 +1,11 @@
+ironchests:
+  icon: ironchests:iron_chest
+  name: menu.ironchests.items.category.ironchests
+  priority: 0
+  items:
+    - ironchests:iron_chest
+    - ironchests:gold_chest
+    - ironchests:diamond_chest
+    - ironchests:wood_iron_upgrade
+    - ironchests:iron_gold_upgrade
+    - ironchests:gold_diamond_upgrade
