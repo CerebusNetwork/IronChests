@@ -2,19 +2,22 @@
   "iron_chest": {
     "item": "block/iron_chest",
     "block": {
-      "directions": "nesw"
+      "directions": "nesw",
+      "hitbox": "chest"
     }
   },
   "gold_chest": {
     "item": "block/gold_chest",
     "block": {
-      "directions": "nesw"
+      "directions": "nesw",
+      "hitbox": "chest"
     }
   },
   "diamond_chest": {
     "item": "block/diamond_chest",
     "block": {
-      "directions": "nesw"
+      "directions": "nesw",
+      "hitbox": "chest"
     }
   },
   "wood_iron_upgrade": "item/wood_iron_upgrade",
