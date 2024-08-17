@@ -1,9 +1,11 @@
 package io.cerebus.ironchests.tileentity
 
+import xyz.xenondevs.cbf.Compound
 import xyz.xenondevs.invui.inventory.VirtualInventory
-import xyz.xenondevs.nova.data.world.block.state.NovaTileEntityState
-import xyz.xenondevs.nova.tileentity.TileEntity
+import xyz.xenondevs.nova.world.BlockPos
+import xyz.xenondevs.nova.world.block.state.NovaBlockState
+import xyz.xenondevs.nova.world.block.tileentity.TileEntity
 
-open class CustomChest(blockState: NovaTileEntityState) : TileEntity(blockState) {
+open class CustomChest(pos: BlockPos, blockState: NovaBlockState, data: Compound) : TileEntity(pos, blockState, data) {
     lateinit var containers: Array<VirtualInventory>
 }

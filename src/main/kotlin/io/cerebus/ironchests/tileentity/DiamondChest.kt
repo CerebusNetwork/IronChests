@@ -2,18 +2,19 @@ package io.cerebus.ironchests.tileentity
 
 import io.cerebus.ironchests.invui.MultiItem
 import io.cerebus.ironchests.invui.VerticalTabButtons
+import xyz.xenondevs.cbf.Compound
 import xyz.xenondevs.invui.gui.Gui
 import xyz.xenondevs.invui.gui.TabGui
 import xyz.xenondevs.invui.gui.structure.Markers
 import xyz.xenondevs.invui.item.Item
-import xyz.xenondevs.nova.data.world.block.state.NovaTileEntityState
-import xyz.xenondevs.nova.tileentity.TileEntity
-import xyz.xenondevs.nova.tileentity.menu.TileEntityMenuClass
+import xyz.xenondevs.nova.world.BlockPos
+import xyz.xenondevs.nova.world.block.state.NovaBlockState
+import xyz.xenondevs.nova.world.block.tileentity.menu.TileEntityMenuClass
 
-class DiamondChest(blockState: NovaTileEntityState) : CustomChest(blockState) {
+class DiamondChest(pos: BlockPos, blockState: NovaBlockState, data: Compound) : CustomChest(pos, blockState, data) {
     
     init {
-        containers = arrayOf(getInventory("goldChestInventory1", 48), getInventory("goldChestInventory2", 48), getInventory("goldChestInventory3", 48))
+        containers = arrayOf(storedInventory("goldChestInventory1", 48), storedInventory("goldChestInventory2", 48), storedInventory("goldChestInventory3", 48))
     }
     
     @TileEntityMenuClass

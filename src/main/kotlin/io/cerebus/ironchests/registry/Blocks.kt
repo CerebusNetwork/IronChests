@@ -4,47 +4,84 @@ import io.cerebus.ironchests.IronChests
 import io.cerebus.ironchests.tileentity.DiamondChest
 import io.cerebus.ironchests.tileentity.GoldChest
 import io.cerebus.ironchests.tileentity.IronChest
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import org.bukkit.Material
+import org.bukkit.block.BlockFace
 import xyz.xenondevs.nova.addon.registry.BlockRegistry
-import xyz.xenondevs.nova.data.world.block.property.Directional
+
 import xyz.xenondevs.nova.initialize.Init
 import xyz.xenondevs.nova.initialize.InitStage
-import xyz.xenondevs.nova.item.options.BlockOptions
-import xyz.xenondevs.nova.item.tool.VanillaToolCategories
-import xyz.xenondevs.nova.item.tool.VanillaToolTiers
+import xyz.xenondevs.nova.util.bukkitBlockData
+import xyz.xenondevs.nova.util.nmsDirection
+import xyz.xenondevs.nova.world.block.NovaTileEntityBlock
+import xyz.xenondevs.nova.world.block.NovaTileEntityBlockBuilder
+import xyz.xenondevs.nova.world.block.TileEntityConstructor
+import xyz.xenondevs.nova.world.block.behavior.*
+
 import xyz.xenondevs.nova.world.block.sound.SoundGroup
+import xyz.xenondevs.nova.world.block.state.property.DefaultBlockStateProperties
+import xyz.xenondevs.nova.world.block.state.property.DefaultScopedBlockStateProperties
+import xyz.xenondevs.nova.world.item.tool.VanillaToolCategories
+import xyz.xenondevs.nova.world.item.tool.VanillaToolTiers
 
 @Init(stage = InitStage.PRE_PACK)
 object Blocks : BlockRegistry by IronChests.registry {
-    
-    private val IRON_CHEST_OPTIONS = BlockOptions(
-        3.0,
-        VanillaToolCategories.PICKAXE,
-        VanillaToolTiers.STONE,
-        true,
-        SoundGroup.STONE,
-        Material.IRON_BLOCK
+
+    val IRON_CHEST = entityCustomChest(
+        "iron_chest", ::IronChest,
+        Breakable(
+            3.0,
+            VanillaToolCategories.PICKAXE,
+            VanillaToolTiers.STONE,
+            true,
+            Material.IRON_BLOCK
+        )
     )
-    
-    private val GOLD_CHEST_OPTIONS = BlockOptions(
-        3.0,
-        VanillaToolCategories.PICKAXE,
-        VanillaToolTiers.STONE,
-        true,
-        SoundGroup.STONE,
-        Material.GOLD_BLOCK
+    val GOLD_CHEST = entityCustomChest(
+        "gold_chest", ::GoldChest,
+        Breakable(
+            3.0,
+            VanillaToolCategories.PICKAXE,
+            VanillaToolTiers.STONE,
+            true,
+            Material.GOLD_BLOCK
+        )
     )
-    private val DIAMOND_CHEST_OPTIONS = BlockOptions(
-        3.0,
-        VanillaToolCategories.PICKAXE,
-        VanillaToolTiers.STONE,
-        true,
-        SoundGroup.STONE,
-        Material.DIAMOND_BLOCK
+    val DIAMOND_CHEST = entityCustomChest(
+        "diamond_chest", ::DiamondChest,
+        Breakable(
+            3.0,
+            VanillaToolCategories.PICKAXE,
+            VanillaToolTiers.STONE,
+            true,
+            Material.DIAMOND_BLOCK
+        )
     )
-    
-    val IRON_CHEST = tileEntity("iron_chest", ::IronChest).blockOptions(IRON_CHEST_OPTIONS).properties(Directional.NORMAL).register()
-    val GOLD_CHEST = tileEntity("gold_chest", ::GoldChest).blockOptions(GOLD_CHEST_OPTIONS).properties(Directional.NORMAL).register()
-    val DIAMOND_CHEST = tileEntity("diamond_chest", ::DiamondChest).blockOptions(DIAMOND_CHEST_OPTIONS).properties(Directional.NORMAL).register()
+
+    private fun entityCustomChest(
+        name: String,
+        ctor: TileEntityConstructor,
+        breakable: BlockBehaviorHolder
+    ): NovaTileEntityBlock = tileEntity(name, ctor) {
+        stateProperties(DefaultScopedBlockStateProperties.FACING_HORIZONTAL)
+        behaviors(
+            TileEntityLimited,
+            TileEntityDrops,
+            TileEntityInteractive,
+            breakable,
+            BlockSounds(SoundGroup.STONE)
+        )
+        models {
+            entityBacked {
+                val facing = getPropertyValueOrThrow(DefaultBlockStateProperties.FACING)
+                Blocks.CHEST.defaultBlockState()
+                    .setValue(BlockStateProperties.HORIZONTAL_FACING, facing.nmsDirection).bukkitBlockData
+            }
+            selectModel {
+                getModel("block/$name").rotated()
+            }
+        }
+    }
 
 }

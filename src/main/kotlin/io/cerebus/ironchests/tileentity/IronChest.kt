@@ -1,15 +1,16 @@
 package io.cerebus.ironchests.tileentity
 
-import org.bukkit.inventory.ItemStack
+import xyz.xenondevs.cbf.Compound
 import xyz.xenondevs.invui.gui.Gui
-import xyz.xenondevs.nova.data.world.block.state.NovaTileEntityState
-import xyz.xenondevs.nova.tileentity.TileEntity
-import xyz.xenondevs.nova.tileentity.menu.TileEntityMenuClass
+import xyz.xenondevs.nova.world.BlockPos
+import xyz.xenondevs.nova.world.block.state.NovaBlockState
+import xyz.xenondevs.nova.world.block.tileentity.menu.TileEntityMenuClass
 
-class IronChest(blockState: NovaTileEntityState) : CustomChest(blockState) {
+
+class IronChest(pos: BlockPos, blockState: NovaBlockState, data: Compound) : CustomChest(pos, blockState, data) {
     
     init {
-        containers = arrayOf(getInventory("ironChestInventory", 54))
+        containers = arrayOf(storedInventory("ironChestInventory", 54))
     }
 
     @TileEntityMenuClass

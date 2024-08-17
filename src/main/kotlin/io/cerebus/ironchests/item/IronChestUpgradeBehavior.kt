@@ -1,30 +1,32 @@
 package io.cerebus.ironchests.item
 
+import io.cerebus.ironchests.registry.Blocks
 import io.cerebus.ironchests.registry.Items
 import io.cerebus.ironchests.tileentity.GoldChest
 import io.cerebus.ironchests.tileentity.IronChest
 import org.bukkit.Location
 import org.bukkit.block.Block
 import org.bukkit.inventory.ItemStack
-import xyz.xenondevs.nova.data.world.block.property.Directional
-import xyz.xenondevs.nova.data.world.block.state.NovaTileEntityState
 import xyz.xenondevs.nova.util.novaBlock
 import xyz.xenondevs.nova.util.novaBlockState
+import xyz.xenondevs.nova.world.block.NovaBlock
+import xyz.xenondevs.nova.world.block.state.property.DefaultBlockStateProperties
+import xyz.xenondevs.nova.world.format.WorldDataManager
+import xyz.xenondevs.nova.world.pos
 
-object IronChestUpgradeBehavior : BaseUpgradeBehaviour() {
+object IronChestUpgradeBehavior : BaseUpgradeBehaviour(Blocks.GOLD_CHEST) {
+
     override fun isValidTargetBlock(block: Block): Boolean = (block.novaBlock?.item == Items.IRON_CHEST)
     
     override fun getOriginalChestData(block: Block): ChestData {
         val novaBlockState = block.novaBlockState
-        val ironChest = ((novaBlockState as? NovaTileEntityState)?.tileEntity as? IronChest)!!
+        val ironChest = (WorldDataManager.getTileEntity(block.pos) as? IronChest)!!
         
-        return ChestData(novaBlockState.getProperty(Directional::class)!!.facing, arrayOf(ironChest.containers[0].items))
+        return ChestData(block.novaBlockState?.get(DefaultBlockStateProperties.FACING)!!, arrayOf(ironChest.containers[0].items))
     }
-    
-    override fun createUpgradedChestItemStack(): ItemStack = Items.GOLD_CHEST.createItemStack()
-    
+
     override fun setUpgradedChestItems(blockLocation: Location, items: Array<Array<ItemStack?>>) {
-        val goldChest = ((blockLocation.block.novaBlockState as? NovaTileEntityState)?.tileEntity as? GoldChest)!!
+        val goldChest = (WorldDataManager.getTileEntity(blockLocation.pos) as? GoldChest)!!
         
         for (i in items[0].indices) {
             val x = i % 9
