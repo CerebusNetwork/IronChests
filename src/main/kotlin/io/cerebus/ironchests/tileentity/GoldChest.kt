@@ -4,8 +4,8 @@ import io.cerebus.ironchests.invui.MultiItem
 import io.cerebus.ironchests.invui.VerticalTabButtons
 import xyz.xenondevs.cbf.Compound
 import xyz.xenondevs.invui.gui.Gui
+import xyz.xenondevs.invui.gui.Markers
 import xyz.xenondevs.invui.gui.TabGui
-import xyz.xenondevs.invui.gui.structure.Markers
 import xyz.xenondevs.invui.item.Item
 import xyz.xenondevs.nova.world.BlockPos
 import xyz.xenondevs.nova.world.block.state.NovaBlockState
@@ -18,7 +18,7 @@ class GoldChest(pos: BlockPos, blockState: NovaBlockState, data: Compound) : Cus
     }
     
     @TileEntityMenuClass
-    inner class GoldChestMenu : GlobalTileEntityMenu() {
+    private inner class GoldChestMenu : GlobalTileEntityMenu() {
         
         private val tabGui1 = Gui.empty(8, 6)
         private val tabGui2 = Gui.empty(8, 6)

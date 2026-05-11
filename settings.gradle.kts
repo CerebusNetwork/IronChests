@@ -2,13 +2,14 @@ rootProject.name = "ironchests"
 
 dependencyResolutionManagement {
     repositories {
+        gradlePluginPortal()
         mavenCentral()
         maven("https://papermc.io/repo/repository/maven-public/")
         maven("https://repo.xenondevs.xyz/releases/")
     }
     versionCatalogs {
         create("libs") {
-            from("xyz.xenondevs.nova:catalog:0.17-alpha.6")
+            from("xyz.xenondevs.nova:catalog:0.18-alpha.13")
         }
     }
 }

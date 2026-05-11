@@ -14,7 +14,7 @@ class IronChest(pos: BlockPos, blockState: NovaBlockState, data: Compound) : Cus
     }
 
     @TileEntityMenuClass
-    inner class IronChestMenu : GlobalTileEntityMenu() {
+    private inner class IronChestMenu : GlobalTileEntityMenu() {
         
         override val gui: Gui = Gui.empty(9, 6)
         

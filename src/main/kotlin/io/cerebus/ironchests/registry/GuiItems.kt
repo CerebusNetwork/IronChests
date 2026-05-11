@@ -25,9 +25,8 @@ object GuiItems : ItemRegistry by IronChests.registry {
         localizedName(localizedName)
         hidden(true)
 
-        models {
-            itemType(Material.SHULKER_SHELL)
-            selectModel {
+        modelDefinition {
+            buildModel {
                 createGuiModel(background = false, stretched = true, "item/gui/$name")
             }
         }

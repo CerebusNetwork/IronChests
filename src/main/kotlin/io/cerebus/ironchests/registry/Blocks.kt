@@ -7,18 +7,13 @@ import io.cerebus.ironchests.tileentity.IronChest
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import org.bukkit.Material
-import org.bukkit.block.BlockFace
 import xyz.xenondevs.nova.addon.registry.BlockRegistry
-
 import xyz.xenondevs.nova.initialize.Init
 import xyz.xenondevs.nova.initialize.InitStage
-import xyz.xenondevs.nova.util.bukkitBlockData
 import xyz.xenondevs.nova.util.nmsDirection
 import xyz.xenondevs.nova.world.block.NovaTileEntityBlock
-import xyz.xenondevs.nova.world.block.NovaTileEntityBlockBuilder
 import xyz.xenondevs.nova.world.block.TileEntityConstructor
 import xyz.xenondevs.nova.world.block.behavior.*
-
 import xyz.xenondevs.nova.world.block.sound.SoundGroup
 import xyz.xenondevs.nova.world.block.state.property.DefaultBlockStateProperties
 import xyz.xenondevs.nova.world.block.state.property.DefaultScopedBlockStateProperties
@@ -32,7 +27,7 @@ object Blocks : BlockRegistry by IronChests.registry {
         "iron_chest", ::IronChest,
         Breakable(
             3.0,
-            VanillaToolCategories.PICKAXE,
+            setOf(VanillaToolCategories.PICKAXE),
             VanillaToolTiers.STONE,
             true,
             Material.IRON_BLOCK
@@ -42,7 +37,7 @@ object Blocks : BlockRegistry by IronChests.registry {
         "gold_chest", ::GoldChest,
         Breakable(
             3.0,
-            VanillaToolCategories.PICKAXE,
+            setOf(VanillaToolCategories.PICKAXE),
             VanillaToolTiers.STONE,
             true,
             Material.GOLD_BLOCK
@@ -52,7 +47,7 @@ object Blocks : BlockRegistry by IronChests.registry {
         "diamond_chest", ::DiamondChest,
         Breakable(
             3.0,
-            VanillaToolCategories.PICKAXE,
+            setOf(VanillaToolCategories.PICKAXE),
             VanillaToolTiers.STONE,
             true,
             Material.DIAMOND_BLOCK
@@ -72,16 +67,12 @@ object Blocks : BlockRegistry by IronChests.registry {
             breakable,
             BlockSounds(SoundGroup.STONE)
         )
-        models {
-            entityBacked {
-                val facing = getPropertyValueOrThrow(DefaultBlockStateProperties.FACING)
-                Blocks.CHEST.defaultBlockState()
-                    .setValue(BlockStateProperties.HORIZONTAL_FACING, facing.nmsDirection).bukkitBlockData
-            }
-            selectModel {
-                getModel("block/$name").rotated()
-            }
-        }
+        entityBacked({
+            val facing = getPropertyValueOrThrow(DefaultBlockStateProperties.FACING)
+            Blocks.CHEST.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, facing.nmsDirection)
+        }, {
+            defaultModel.rotated()
+        })
     }
 
 }

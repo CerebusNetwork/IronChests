@@ -22,23 +22,16 @@ dependencies {
 }
 
 addon {
-    id = project.name
     name = "IronChests"
     version = project.version.toString()
-    novaVersion = libs.versions.nova
     main = "io.cerebus.ironchests.IronChests"
-    authors = listOf("CraftCoderr")
+
+    val outDir = project.findProperty("outDir")
+    if (outDir is String)
+        destination.set(File(outDir))
 }
 
 tasks {
-    register<Copy>("addonJar") {
-        group = "build"
-        dependsOn("jar")
-        from(File(project.layout.buildDirectory.get().asFile, "libs/${project.name}-${project.version}.jar"))
-        into((project.findProperty("outDir") as? String)?.let(::File) ?: project.layout.buildDirectory.get().asFile)
-        rename { "${addonMetadata.get().addonName.get()}-${project.version}.jar" }
-    }
-    
     withType<KotlinCompile> {
         compilerOptions {
             jvmTarget = JvmTarget.JVM_21
