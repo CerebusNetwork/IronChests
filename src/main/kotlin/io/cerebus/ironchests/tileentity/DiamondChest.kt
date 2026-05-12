@@ -12,31 +12,31 @@ import xyz.xenondevs.nova.world.block.state.NovaBlockState
 import xyz.xenondevs.nova.world.block.tileentity.menu.TileEntityMenuClass
 
 class DiamondChest(pos: BlockPos, blockState: NovaBlockState, data: Compound) : CustomChest(pos, blockState, data) {
-    
+
     init {
         containers = arrayOf(storedInventory("goldChestInventory1", 48), storedInventory("goldChestInventory2", 48), storedInventory("goldChestInventory3", 48))
     }
-    
+
     @TileEntityMenuClass
-    private inner class GoldChestMenu : GlobalTileEntityMenu() {
-        
+    private inner class DiamondChestMenu : GlobalTileEntityMenu() {
+
         private val tabGui1 = Gui.empty(8, 6)
         private val tabGui2 = Gui.empty(8, 6)
         private val tabGui3 = Gui.empty(8, 6)
-        
+
         init {
             tabGui1.fillRectangle(0, 0, 8, containers[0], true)
             tabGui2.fillRectangle(0, 0, 8, containers[1], true)
             tabGui3.fillRectangle(0, 0, 8, containers[2], true)
         }
-        
+
         private fun createTabItems(tab: Int, top: Boolean = false, bottom: Boolean = false): Array<Item> {
             return arrayOf(
                 VerticalTabButtons.createTabBtnTopSectionItem(tab, top),
                 VerticalTabButtons.createTabBtnBottomSectionItem(tab, bottom))
         }
-        
-        override val gui: Gui = TabGui.normal()
+
+        override val gui: Gui = TabGui.builder()
             .setStructure(
                 "x x x x x x x x 0",
                 "x x x x x x x x 0",
@@ -50,7 +50,7 @@ class DiamondChest(pos: BlockPos, blockState: NovaBlockState, data: Compound) : 
             .addIngredient('2', MultiItem(createTabItems(2, bottom = true)))
             .setTabs(listOf(tabGui1, tabGui2, tabGui3))
             .build()
-        
+
     }
-    
+
 }

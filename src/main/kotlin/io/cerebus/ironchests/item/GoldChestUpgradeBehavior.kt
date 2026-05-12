@@ -7,10 +7,9 @@ import io.cerebus.ironchests.tileentity.GoldChest
 import org.bukkit.Location
 import org.bukkit.block.Block
 import org.bukkit.inventory.ItemStack
-import org.bukkit.material.Directional
+import xyz.xenondevs.invui.inventory.event.UpdateReason
 import xyz.xenondevs.nova.util.novaBlock
 import xyz.xenondevs.nova.util.novaBlockState
-import xyz.xenondevs.nova.world.block.NovaBlock
 import xyz.xenondevs.nova.world.block.state.property.DefaultBlockStateProperties
 import xyz.xenondevs.nova.world.format.WorldDataManager
 import xyz.xenondevs.nova.world.pos
@@ -29,7 +28,7 @@ object GoldChestUpgradeBehavior : BaseUpgradeBehaviour(Blocks.DIAMOND_CHEST) {
         
         for (i in items.indices) {
             for (itemIndex in items[i].indices) {
-                diamondChest.containers[i].setItemSilently(itemIndex, items[i][itemIndex])
+                diamondChest.containers[i].setItem(UpdateReason.SUPPRESSED, itemIndex, items[i][itemIndex])
             }
         }
     }

@@ -7,7 +7,6 @@ import io.cerebus.ironchests.tileentity.IronChest
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import org.bukkit.Material
-import xyz.xenondevs.nova.addon.registry.BlockRegistry
 import xyz.xenondevs.nova.initialize.Init
 import xyz.xenondevs.nova.initialize.InitStage
 import xyz.xenondevs.nova.util.nmsDirection
@@ -21,7 +20,7 @@ import xyz.xenondevs.nova.world.item.tool.VanillaToolCategories
 import xyz.xenondevs.nova.world.item.tool.VanillaToolTiers
 
 @Init(stage = InitStage.PRE_PACK)
-object Blocks : BlockRegistry by IronChests.registry {
+object Blocks {
 
     val IRON_CHEST = entityCustomChest(
         "iron_chest", ::IronChest,
@@ -58,7 +57,7 @@ object Blocks : BlockRegistry by IronChests.registry {
         name: String,
         ctor: TileEntityConstructor,
         breakable: BlockBehaviorHolder
-    ): NovaTileEntityBlock = tileEntity(name, ctor) {
+    ): NovaTileEntityBlock = IronChests.tileEntity(name, ctor) {
         stateProperties(DefaultScopedBlockStateProperties.FACING_HORIZONTAL)
         behaviors(
             TileEntityLimited,

@@ -6,19 +6,17 @@ version = "0.1-alpha"
 
 plugins {
     alias(libs.plugins.kotlin)
-    alias(libs.plugins.paperweight)
     alias(libs.plugins.nova)
 }
 
 repositories {
     mavenCentral()
-    maven("https://papermc.io/repo/repository/maven-public/")
+    maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://repo.xenondevs.xyz/releases")
 }
 
 dependencies {
-    paperweight.paperDevBundle(libs.versions.paper)
-    implementation(libs.nova)
+    compileOnly(libs.nova)
 }
 
 addon {
@@ -31,10 +29,14 @@ addon {
         destination.set(File(outDir))
 }
 
+kotlin {
+    jvmToolchain(25)
+}
+
 tasks {
     withType<KotlinCompile> {
         compilerOptions {
-            jvmTarget = JvmTarget.JVM_21
+            jvmTarget = JvmTarget.JVM_25
         }
     }
 }

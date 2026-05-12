@@ -2,15 +2,12 @@ package io.cerebus.ironchests.invui
 
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.ClickType
-import org.bukkit.event.inventory.InventoryClickEvent
-import xyz.xenondevs.invui.gui.TabGui
+import xyz.xenondevs.invui.Click
 import xyz.xenondevs.invui.item.AbstractTabGuiBoundItem
-import xyz.xenondevs.invui.item.Click
-import xyz.xenondevs.invui.item.ItemBuilder
 import xyz.xenondevs.invui.item.ItemProvider
 import xyz.xenondevs.nova.util.playClickSound
 
-class SimpleTabItem(private val tab: Int, private val activeItem: ItemBuilder, private val inactiveItem: ItemBuilder)
+class SimpleTabItem(private val tab: Int, private val activeItem: ItemProvider, private val inactiveItem: ItemProvider)
     : AbstractTabGuiBoundItem() {
 
     override fun getItemProvider(player: Player): ItemProvider {

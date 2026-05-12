@@ -1,7 +1,6 @@
 package io.cerebus.ironchests.item
 
 import io.cerebus.ironchests.registry.Blocks
-import io.cerebus.ironchests.registry.Items
 import io.cerebus.ironchests.tileentity.IronChest
 import org.bukkit.Location
 import org.bukkit.Material
@@ -10,7 +9,7 @@ import org.bukkit.block.Chest
 import org.bukkit.inventory.BlockInventoryHolder
 import org.bukkit.inventory.DoubleChestInventory
 import org.bukkit.inventory.ItemStack
-import xyz.xenondevs.nova.world.block.NovaBlock
+import xyz.xenondevs.invui.inventory.event.UpdateReason
 import xyz.xenondevs.nova.world.format.WorldDataManager
 import xyz.xenondevs.nova.world.pos
 import org.bukkit.block.data.type.Chest as ChestBlockData
@@ -35,7 +34,7 @@ object WoodChestUpgradeBehavior : BaseUpgradeBehaviour(Blocks.IRON_CHEST) {
         val ironChest = (WorldDataManager.getTileEntity(blockLocation.pos) as? IronChest)!!
 
         for (i in items[0].indices) {
-            ironChest.containers[0].setItemSilently(i, items[0][i])
+            ironChest.containers[0].setItem(UpdateReason.SUPPRESSED, i, items[0][i])
         }
     }
 }
